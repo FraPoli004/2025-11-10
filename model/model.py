@@ -51,6 +51,7 @@ class Model:
         return archi[:5]
 
     def getCamminoMassimo(self, source):
+        source = self._idMap.get(int(source))
         self._cammino_ottimo = []
         self._ricorsione([source])
         return self._cammino_ottimo

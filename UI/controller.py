@@ -64,6 +64,7 @@ class Controller:
         self._view._btnCerca.disabled = False
         self._view._btnRicorsione.disabled = False
         self._view._ddNode.disabled = False
+        self.fillDDNode()
 
         self._view.update_page()
 
@@ -73,8 +74,8 @@ class Controller:
     def handleCerca(self, e):
         self._view.txt_result.controls.clear()
         source = self._view._ddNode.value
-        cammino = self._model.getCammino(source)
-        self._view.txt_result.controls.append(ft.Text(f'il cammino massimo partendo dal nodo {source.order_id} è composto dai seguenti nodi:'))
+        cammino = self._model.getCamminoMassimo(source)
+        self._view.txt_result.controls.append(ft.Text(f'il cammino massimo partendo dal nodo {source} è composto dai seguenti nodi:'))
         for n in cammino:
             self._view.txt_result.controls.append(ft.Text(f'{n}'))
         self._view.update_page()
