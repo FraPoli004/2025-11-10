@@ -12,7 +12,7 @@ class Controller:
         stores = (self._model.getStores())
         for s in stores:
             self._view._ddStore.options.append(
-                ft.dropdown.Option(text=s.store_name, data=s.store_id)
+                ft.dropdown.Option(key=str(s.store_id), text=s.store_name)
             )
         self._view.update_page()
 
@@ -21,8 +21,14 @@ class Controller:
         k = self._view._txtIntK.value
         s = self._view._ddStore.value
         self._view.txt_result.controls.clear()
-        k = int(k)
 
+        if k is None or k=="":
+            self._view.txt_result.controls.append(
+                ft.Text("inserire un numero intero maggiore di zero", color="red"))
+            self._view.update_page()
+            return
+
+        k = int(k)
 
         if k < 0:
             self._view.txt_result.controls.append(
@@ -30,11 +36,6 @@ class Controller:
             self._view.update_page()
             return
 
-        if k is None:
-            self._view.txt_result.controls.append(
-                ft.Text("inserire un numero intero maggiore di zero", color="red"))
-            self._view.update_page()
-            return
         if s is None:
             self._view.txt_result.controls.append(
                 ft.Text("inserire uno degli store", color="red"))

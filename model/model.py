@@ -21,7 +21,7 @@ class Model:
     def buildGraph(self, k,s):
         self._grafo.clear()
         self._idMap = {}
-        self._nodi = DAO.getAllNodes(k)
+        self._nodi = DAO.getAllNodes(s)
         for n in self._nodi:
             self._grafo.add_node(n)
             self._idMap[n.order_id] = n
