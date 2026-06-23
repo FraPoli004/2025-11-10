@@ -16,3 +16,6 @@ class Store:
 
     def __str__(self):
         return f"{self.store_name}"
+
+    def __eq__(self, other):
+        return self.store_id == other.store_id

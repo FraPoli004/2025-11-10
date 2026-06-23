@@ -8,9 +8,49 @@ class Controller:
         # the model, which implements the logic of the program and holds the data
         self._model = model
 
+    def fillDDStore(self):
+        stores = (self._model.getStores())
+        for s in stores:
+            self._view._ddStore.options.append(
+                ft.dropdown.Option(text=s.store_name, data=s.store_id)
+            )
+        self._view.update_page()
+
 
     def handleCreaGrafo(self, e):
-        pass
+        k = self._view._txtIntK.value
+        s = self._view._ddStore.value
+        self._view.txt_result.controls.clear()
+        k = int(k)
+
+
+        if k < 0:
+            self._view.txt_result.controls.append(
+                ft.Text("inserire intero maggiore di zero", color="red"))
+            self._view.update_page()
+            return
+
+        if k is None:
+            self._view.txt_result.controls.append(
+                ft.Text("inserire un numero intero maggiore di zero", color="red"))
+            self._view.update_page()
+            return
+        if s is None:
+            self._view.txt_result.controls.append(
+                ft.Text("inserire uno degli store", color="red"))
+            self._view.update_page()
+            return
+
+        self._model.buildGraph(k,s)
+        self._view.txt_result.controls.clear()
+        self._view.txt_result.controls.append(ft.Text("grafo creato correttamente", color="green"))
+        self._view.txt_result.controls.append(ft.Text(f'il grafo ha {self._model.get_numnodi()} nodi'))
+        self._view.txt_result.controls.append(ft.Text(f'il grafo ha {self._model.get_numarchi()} archi'))
+
+        self._view.update_page()
+
+
+
 
     def handleCerca(self, e):
         pass

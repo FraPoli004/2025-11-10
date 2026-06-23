@@ -16,3 +16,6 @@ class Order:
 
     def __str__(self):
         return f"{self.order_id}"
+
+    def __eq__(self, other):
+        return self.order_id == other.order_id
